@@ -3,6 +3,7 @@ import Button from '../../../components/UI/Button/Button';
 import classes from './ContactData.css';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Input from '../../../components/UI/Input/input';
+import { connect } from 'react-redux';
 
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
 import axiosInstance from '../../../axios-orders';
@@ -139,6 +140,7 @@ class ContactData extends Component {
     }
 }
 
+<<<<<<< HEAD
 const mapStateToProps = (state) => {
 
     return {
@@ -154,3 +156,13 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(ContactData, axiosInstance));
+=======
+const mapStatetoProps = state => {
+
+    return {
+        ings: state.ingredients,
+        price: state.totalPrice
+    }
+}
+export default connect(mapStatetoProps)(ContactData);
+>>>>>>> 8fc961e0c4d7b74cc4e5df48c1db66cb123a071e
