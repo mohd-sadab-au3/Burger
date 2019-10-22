@@ -37,12 +37,8 @@ class BurgerBuilder extends Component {
 
     purchased = () => {
 
-        this.setState({ purchasing: true });
-    }
 
-    modalCloseHadler = () => {
-        console.log("click");
-        this.setState({ purchasing: false });
+        this.setState({ purchasing: true });
     }
 
     purchaseContinueHandler = () => {
@@ -50,6 +46,13 @@ class BurgerBuilder extends Component {
 
         this.props.history.push('/checkout');
     }
+
+    modalCloseHadler = () => {
+        console.log("click");
+        this.setState({ purchasing: false });
+    }
+
+
 
     render() {
 
@@ -100,9 +103,9 @@ class BurgerBuilder extends Component {
 const mapStatetoProps = state => {
 
     return {
-        ings: state.ingredients,
-        price: state.totalPrice,
-        error: state.error
+        ings: state.burgerBuilder.ingredients,
+        price: state.burgerBuilder.totalPrice,
+        error: state.burgerBuilder.error
     }
 }
 

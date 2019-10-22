@@ -22,14 +22,16 @@ export const purchaseBurgerFail = (error) => {
 
 export const purchaseBurger = (orderData) => {
 
+    console.log(orderData);
     return dispatch => {
 
         axiosInstance.post('/orders.json', orderData)
             .then(response => {
                 console.log(response.data);
-                purchaseBurgerSuccess(response.data, orderData);
+                purchaseBurgerSuccess(response.data.name, orderData);
             })
             .catch(error => {
+                console.log(error);
                 purchaseBurgerFail(error);
             });
     }
