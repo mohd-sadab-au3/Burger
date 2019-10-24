@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Button from '../../../components/UI/Button/Button';
 import classes from './ContactData.css';
-import Spinner from '../../../components/UI/Spinner/Spinner';
 import Input from '../../../components/UI/Input/input';
 
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
@@ -41,14 +40,14 @@ class ContactData extends Component {
     orderHandler = (event) => {
 
         event.preventDefault();
-        // console.log(this.props);
+        console.log("order handler", this.props);
 
         let formData = {};
         for (let key in this.state.orderform) {
             formData[key] = this.state.orderform[key].value;
         }
         const orderDetails = {
-            ingredients: this.props.ingredients,
+            ingredients: this.props.ings,
             orderDetails: formData,
             price: this.props.price
 
@@ -121,10 +120,6 @@ class ContactData extends Component {
 
             <Button btnType="Success" disabled={!this.state.formIsValid} >ORDER</Button>
         </form>);
-
-        if (this.state.loading) {
-            form = <Spinner />;
-        }
 
         return (
 
