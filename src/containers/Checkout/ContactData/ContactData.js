@@ -54,7 +54,7 @@ class ContactData extends Component {
 
         }
 
-        this.props.onOrder(orderDetails);
+        this.props.onOrder(orderDetails, this.props.isAuthenticated);
 
 
     }
@@ -138,13 +138,14 @@ const mapStateToProps = (state) => {
     return {
         ings: state.burgerBuilder.ingredients,
         price: state.burgerBuilder.totalPrice,
-        loading: state.order.loading
+        loading: state.order.loading,
+        isAuthenticated: state.auth.token !== null
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onOrder: (data) => dispatch(actions.purchaseBurger(data))
+        onOrder: (data, token) => dispatch(actions.purchaseBurger(data, token))
     }
 }
 
