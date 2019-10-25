@@ -16,7 +16,8 @@ const order = (props) => {
 
         return (<span key={ig.name}
             style={{
-                margin: '0px 5px',
+                margin: '5px',
+                marginTop: '5px',
                 padding: '10px',
                 textTransform: 'capitalize',
                 boxShadow: '0px 2px 3px #ccc',

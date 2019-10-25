@@ -28,7 +28,9 @@ const authFail = (state, action) => {
 
     return ({
         error: action,
-        loading: false
+        loading: false,
+        token: null,
+        userId: null
     })
 }
 
@@ -55,7 +57,7 @@ const reducer = (state = initialState, action) => {
             return authSuccess(state, action);
 
         case actionTypes.AUTH_FAIL:
-            return authFail(state, action);
+            return authFail(state, action.error);
 
         case actionTypes.LOG_OUT:
             return (authLogOut(state, action));
