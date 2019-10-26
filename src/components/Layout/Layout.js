@@ -11,8 +11,6 @@ class Layout extends Component {
     }
 
     showSideDrawerHandler = () => {
-
-        console.log("click");
         this.setState({
             showSideDrawer: false
         })

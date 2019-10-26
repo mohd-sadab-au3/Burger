@@ -6,7 +6,6 @@ const input = (props) => {
     let inputElem = null;
     let msg = null;
 
-    //console.log("is ", props.invalid);
     if (props.invalid && props.viewed) {
         msg = (<div className={classes.Alert}>This field is required</div>);
     }

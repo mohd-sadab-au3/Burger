@@ -28,8 +28,6 @@ let errorHandler = (WrappedComponent, axios) => {
         }
 
         componentWillUnmount() {
-
-            console.log("will unmount", this.reqInterceptors, this.resInterceptors);
             axios.interceptors.request.eject(this.reqInterceptors);
             axios.interceptors.response.eject(this.resInterceptors);
 

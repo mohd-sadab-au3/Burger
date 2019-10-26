@@ -3,7 +3,6 @@ import classes from './NavigationItems.css'
 import NavigationItem from './NavigationItem/NavigationItem'
 let navigationItems = (props) => {
 
-    console.log("props is", props);
     return (
 
         <ul className={classes.NavigationItems}>
