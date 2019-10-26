@@ -49,14 +49,11 @@ export const authFinished = (expirationTime) => {
 
 export const authExpiresTime = () => {
 
-    console.log("Call from authe");
     return dispatch => {
         let expiresIn = null;
         if (localStorage.getItem("expiresIn")) {
 
             expiresIn = new Date(localStorage.getItem("expiresIn"))
-            console.log("Call from authe", expiresIn.getSeconds());
-            console.log("Call from ", new Date().getSeconds());
 
             if (expiresIn > new Date()) {
 
@@ -87,7 +84,6 @@ export const auth = (email, password, isSignUp) => {
         }
         axios.post(url, data)
             .then((response) => {
-                // console.log(response.data)
                 dispatch(authSuccess(response.data.idToken, response.data.localId));
                 dispatch(authFinished(response.data.expiresIn))
                 localStorage.setItem("token", response.data.idToken);
@@ -98,7 +94,6 @@ export const auth = (email, password, isSignUp) => {
                 //dispatch(authExpiresTime());
 
             }).catch(error => {
-                //console.log(error.response.data.error);
                 dispatch(authFail(error.response.data.error));
             })
 

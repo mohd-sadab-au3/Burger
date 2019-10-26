@@ -41,7 +41,6 @@ class ContactData extends Component {
     orderHandler = (event) => {
 
         event.preventDefault();
-        console.log("order handler", this.props);
 
         let formData = {};
         for (let key in this.state.orderform) {
@@ -68,13 +67,11 @@ class ContactData extends Component {
             valid = value.trim() !== '' && valid
         }
 
-        // console.log(valid);
         return (valid);
     }
 
     inputChangeHandler = (event, inputIdentifier) => {
-        //console.log(event.target.value);
-        // console.log(inputIdentifier);
+
         const updatedForm = {
             ...this.state.orderform
         }

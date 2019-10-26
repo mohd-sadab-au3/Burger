@@ -51,7 +51,6 @@ class BurgerBuilder extends Component {
     }
 
     modalCloseHadler = () => {
-        console.log("click");
         this.setState({ purchasing: false });
     }
 

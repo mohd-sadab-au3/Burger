@@ -8,13 +8,16 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
 
-    console.log(state.purchased, action.type);
     switch (action.type) {
 
         case actionTypes.PURCHASE_INIT:
             return {
                 ...state
                 , purchased: false,
+            }
+        case actionTypes.PURCHASE_BURGER_START:
+            return {
+                ...state,
                 loading: true
             }
         case actionTypes.PURCHASE_BURGER_SUCCESS:

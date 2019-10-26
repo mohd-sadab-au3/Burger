@@ -41,12 +41,9 @@ class Auth extends Component {
             valid = value.trim() !== '' && valid
         }
 
-        // console.log(valid);
         return (valid);
     }
     inputChangeHandler = (event, inputIdentifier) => {
-        //console.log(event.target.value);
-        // console.log(inputIdentifier);
         const updatedForm = {
             ...this.state.controls
         }
@@ -122,7 +119,7 @@ class Auth extends Component {
             <Button btnType="Success" >{this.state.signUp ? 'SIGN-UP' : 'SIGN-IN'}</Button>
             <br></br>
             <Button btnType="Danger"
-                clicked={this.switchMethodHandler} >SWITCH TO {this.state.signUp ? 'SIGN-UP' : 'SIGN-IN'}</Button>
+                clicked={this.switchMethodHandler} >SWITCH TO {this.state.signUp ? 'SIGN-IN' : 'SIGN-UP'}</Button>
         </form>
 
         )
