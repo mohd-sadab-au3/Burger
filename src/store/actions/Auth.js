@@ -28,7 +28,9 @@ export const authFail = (error) => {
 }
 
 export const logOut = () => {
-
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("expiresIn");
     return {
         type: actionTypes.LOG_OUT
     }
@@ -40,11 +42,35 @@ export const authFinished = (expirationTime) => {
 
         setTimeout(() => {
             dispatch(logOut())
+
         }, expirationTime * 1000);
     }
 }
 
+export const authExpiresTime = () => {
 
+    console.log("Call from authe");
+    return dispatch => {
+        let expiresIn = null;
+        if (localStorage.getItem("expiresIn")) {
+
+            expiresIn = new Date(localStorage.getItem("expiresIn"))
+            console.log("Call from authe", expiresIn.getSeconds());
+            console.log("Call from ", new Date().getSeconds());
+
+            if (expiresIn > new Date()) {
+
+                dispatch(authSuccess(localStorage.getItem("token"), localStorage.getItem("userId")));
+
+                dispatch(authFinished((expiresIn.getTime() - new Date().getTime()) / 1000));
+            }
+            else {
+                dispatch(logOut());
+
+            }
+        }
+    }
+}
 
 export const auth = (email, password, isSignUp) => {
 
@@ -61,11 +87,18 @@ export const auth = (email, password, isSignUp) => {
         }
         axios.post(url, data)
             .then((response) => {
-                console.log(response.data)
+                // console.log(response.data)
                 dispatch(authSuccess(response.data.idToken, response.data.localId));
                 dispatch(authFinished(response.data.expiresIn))
+                localStorage.setItem("token", response.data.idToken);
+                let expires = new Date(new Date().getTime() + response.data.expiresIn * 1000);
+                localStorage.setItem("expiresIn", expires)
+                localStorage.setItem("token", response.data.idToken)
+                localStorage.setItem("userId", response.data.localId)
+                //dispatch(authExpiresTime());
+
             }).catch(error => {
-                console.log(error.response.data.error);
+                //console.log(error.response.data.error);
                 dispatch(authFail(error.response.data.error));
             })
 

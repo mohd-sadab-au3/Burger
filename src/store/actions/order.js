@@ -1,7 +1,5 @@
 import * as actionTypes from './actionTypes';
-
 import axiosInstance from '../../axios-orders';
-
 export const purchaseInit = () => {
 
     return {
@@ -32,7 +30,7 @@ export const purchaseBurger = (orderData) => {
         dispatch(purchaseBurgerStart())
         axiosInstance.post('/orders.json', orderData)
             .then(response => {
-                console.log(response.data);
+                //console.log(response.data);
                 purchaseBurgerSuccess(response.data, orderData);
             })
             .catch(error => {
