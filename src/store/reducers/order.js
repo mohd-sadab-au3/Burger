@@ -14,7 +14,8 @@ const reducer = (state = initialState, action) => {
         case actionTypes.PURCHASE_INIT:
             return {
                 ...state
-                , purchased: false
+                , purchased: false,
+                loading: true
             }
         case actionTypes.PURCHASE_BURGER_SUCCESS:
             const newOrder = {
