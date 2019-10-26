@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import Button from '../../../components/UI/Button/Button';
 import classes from './ContactData.css';
 import Input from '../../../components/UI/Input/input';
-
+import Spinner from '../../../components/UI/Spinner/Spinner';
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
 import axiosInstance from '../../../axios-orders';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import * as actions from '../../../store/actions/index';
 
 class ContactData extends Component {
@@ -49,12 +50,12 @@ class ContactData extends Component {
         const orderDetails = {
             ingredients: this.props.ings,
             orderDetails: formData,
-            price: this.props.price
-
+            price: this.props.price,
+            userId: this.props.userId
 
         }
 
-        this.props.onOrder(orderDetails, this.props.isAuthenticated);
+        this.props.onOrder(orderDetails, this.props.token);
 
 
     }
@@ -106,6 +107,8 @@ class ContactData extends Component {
             });
         }
 
+
+
         let form = (<form onSubmit={this.orderHandler}>
 
             {formElements.map(formElem => (
@@ -121,6 +124,12 @@ class ContactData extends Component {
             <Button btnType="Success" disabled={!this.state.formIsValid} >ORDER</Button>
         </form>);
 
+        if (this.props.loading) {
+            form = (<Spinner />);
+        }
+
+        if (this.props.purchased)
+            form = (<Redirect to="/" />);
         return (
 
             <div className={classes.ContactData}>
@@ -139,7 +148,10 @@ const mapStateToProps = (state) => {
         ings: state.burgerBuilder.ingredients,
         price: state.burgerBuilder.totalPrice,
         loading: state.order.loading,
-        isAuthenticated: state.auth.token !== null
+        isAuthenticated: state.auth.token !== null,
+        userId: state.auth.userId,
+        token: state.auth.token,
+        purchased: state.order.purchased
     }
 }
 
